@@ -35,7 +35,7 @@ public class AnimalAbstractTest {
     @Test(expected = IllegalArgumentException.class)
     public void animal_InstantiatesWithType_panther(){
         Animal myAnimal = new Animal("","","","");
-        assertEquals("", myAnimal.getType());
+        assertEquals("panther", myAnimal.getType());
     }
 
 
