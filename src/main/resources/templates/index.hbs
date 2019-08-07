@@ -13,7 +13,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="header">WILDLIFE TRACKER</h1>
-                    <div class="questionnaire">
                         <br>
                         <br>
                         <br>
@@ -22,12 +21,11 @@
                             <div class="form-group">
                                 <label for="rangerName">Ranger's Name</label>
                                 <div class="text">
-                                    <input type="text" id="rangerName" name="rangerName">
+                                    <input type="text" id="ranger" name="ranger">
                                 </div>
 
                             </div>
                             <hr>
-                            <div class="try">
                                 <p>Location of Sighting</p>
                                 <select name="sightingLocation" id="sightingLocation">
                                     <option value="North">North</option>
@@ -36,10 +34,9 @@
                                     <option value="West">West</option>
                                     <option value="Central">Central</option>
                                 </select>
-                            </div>
 
                             <hr>
-                            <div class="">
+
                                 <div class="form-group">
                                     <label for="animalName">Animal Name</label>
                                     <div class="text">
@@ -47,8 +44,6 @@
                                     </div>
 
                                 </div>
-
-                            </div>
                             <hr>
 
                             <div class="try">
@@ -68,15 +63,11 @@
                                 </select>
                             </div>
                             <hr>
-
-
-                            <div class="try">
                                 <p>Animal species</p>
                                 <select name="animalType" id="animalType">
                                     <option value="safe">Safe</option>
                                     <option value="endangered">Endangered</option>
                                 </select>
-                            </div>
                             <hr>
                             <button type="submit" class="button">Submit</button>
                         </form>
@@ -88,5 +79,6 @@
                 <hr>
             </div>
         </div>
+    </div>
 {{/partial}}
 {{>layout.hbs}}
