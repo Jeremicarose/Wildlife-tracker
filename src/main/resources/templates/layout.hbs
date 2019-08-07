@@ -1,0 +1,31 @@
+{{#block "header"}}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{{#block "title"}}Squd{{/block}}</title>
+        <link rel='stylesheet' href='/styles.css'>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+        {{#block "styles"}}{{/block}}
+    </head>
+
+{{/block}}
+<body>
+<header id="header">
+    <nav id="nav-bar">
+
+        <a class="nav-link" href="/">HOME</a>
+        <a class="nav-link" href="/form">ADD ANIMAL</a>
+        <a class="nav-link" href="/view">VIEW SIGHTINGS</a>
+
+    </nav>
+
+</header><div class="container">
+    <div class="col-md-12">
+        {{#block "content"}}{{/block}}
+    </div>
+</div>
+{{#block "footer"}}
+    <footer class="foot"></footer>
+    </body>
+    </html>
+{{/block}}
