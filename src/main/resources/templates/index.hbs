@@ -1,0 +1,92 @@
+{{#partial "styles"}}
+    <link rel='stylesheet' href='/css/index.css'>
+{{/partial}}
+
+{{#partial "content"}}
+    <div class="background">
+
+        <div class="cointainer ">
+            <div class="row">
+                <div class="col-md-12">  <h1>Welcome to our Wildlife-Tracker website. </h1></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="header">WILDLIFE TRACKER</h1>
+                    <div class="questionnaire">
+                        <br>
+                        <br>
+                        <br>
+                        <form action="/view" method="post">
+                            <h2>Animal Sighting</h2>
+                            <div class="form-group">
+                                <label for="rangerName">Ranger's Name</label>
+                                <div class="text">
+                                    <input type="text" id="rangerName" name="rangerName">
+                                </div>
+
+                            </div>
+                            <hr>
+                            <div class="try">
+                                <p>Location of Sighting</p>
+                                <select name="sightingLocation" id="sightingLocation">
+                                    <option value="North">North</option>
+                                    <option value="South">South</option>
+                                    <option value="East">East</option>
+                                    <option value="West">West</option>
+                                    <option value="Central">Central</option>
+                                </select>
+                            </div>
+
+                            <hr>
+                            <div class="">
+                                <div class="form-group">
+                                    <label for="animalName">Animal Name</label>
+                                    <div class="text">
+                                        <input type="text" id="animalName" name="animalName">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <hr>
+
+                            <div class="try">
+                                <p>Animal's Age</p>
+                                <select name="animalAge" id="animalAge">
+                                    <option value="newborn">Newborn</option>
+                                    <option value="young">Young</option>
+                                    <option value="adult">Adult</option>
+                                </select>
+                            </div>
+                            <hr>
+                            <div class="try">
+                                <p>Animal's Health</p>
+                                <select name="animalHealth" id="animalHealth">
+                                    <option value="weak">Weak</option>
+                                    <option value="healthy">Healthy</option>
+                                </select>
+                            </div>
+                            <hr>
+
+
+                            <div class="try">
+                                <p>Animal species</p>
+                                <select name="animalType" id="animalType">
+                                    <option value="safe">Safe</option>
+                                    <option value="endangered">Endangered</option>
+                                </select>
+                            </div>
+                            <hr>
+                            <button type="submit" class="button">Submit</button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <hr>
+            </div>
+        </div>
+{{/partial}}
+{{>layout.hbs}}
