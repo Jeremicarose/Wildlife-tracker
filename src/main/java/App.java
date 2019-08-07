@@ -20,11 +20,11 @@ public class App {
 
         post("/view", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            String rangerName = request.queryParams("rangerName");
-            String sightingLocation = request.queryParams("sightingLocation");
             String animalName = request.queryParams("animalName");
             String animalAge = request.queryParams("animalAge");
             String animalHealth = request.queryParams("animalHealth");
+            String rangerName = request.queryParams("rangerName");
+            String sightingLocation = request.queryParams("sightingLocation");
             String animalType = request.queryParams("animalType");
             if(animalType.equals("safe")){
                 Animal regularAnimal = new Animal(animalName, animalAge, animalHealth, animalType);
@@ -40,14 +40,14 @@ public class App {
             List<Sightings> allSightings = Sightings.all();
             List<Animal> allAnimal= Animal.all();
             model.put("sightings", allSightings);
-            model.put("animal", allAnimal);
+            model.put("animals", allAnimal);
             return new ModelAndView(model, "view.hbs");
         }, new HandlebarsTemplateEngine());
 
         get("/view", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("sightings", Sightings.all());
-            model.put("animal", Animal.all());
+            model.put("animals", Animal.all());
             return new ModelAndView(model, "view.hbs");
         }, new HandlebarsTemplateEngine());
     }

@@ -10,6 +10,7 @@ public class Endangered extends  AnimalAbstract {
         this.health = health;
         this.type = ANIMAL_TYPE;
     }
+
     @Override
     public boolean equals(Object otherAnimal){
         if(!(otherAnimal instanceof Object)){
@@ -24,18 +25,19 @@ public class Endangered extends  AnimalAbstract {
     @Override
     public void save(){
         try(Connection con = DB.sql2otest.open()){
-            String sql = "INSERT INTO animal (name, age, health, type) VALUES (:name, :age, :health, :type);";
+            String sql = "INSERT INTO animals (name, age, health, type) VALUES (:name, :age, :health, :type);";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .addParameter("age", this.age)
                     .addParameter("health", this.health)
                     .addParameter("type", this.type)
+                    .throwOnMappingFailure(false)
                     .executeUpdate()
                     .getKey();
         }
     }
     public static List<Endangered> all(){
-        String sql = "SELECT * FROM animal WHERE type='endangered'";
+        String sql = "SELECT * FROM animals WHERE type='endangered'";
         try(org.sql2o.Connection con = DB.sql2otest.open()) {
             return con.createQuery(sql).executeAndFetch(Endangered.class);
         }

@@ -25,7 +25,7 @@ public class AnimalAbstract {
 
     public void save() {
         try (org.sql2o.Connection con = DB.sql2otest.open()) {
-            String sql = "INSERT INTO animal (name, age, health, type) VALUES (:name, :age, :health, :type);";
+            String sql = "INSERT INTO animals (name, age, health, type) VALUES (:name, :age, :health, :type);";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .addParameter("age", this.age)
@@ -38,7 +38,7 @@ public class AnimalAbstract {
 
     }
     public static AnimalAbstract find(int id) {
-        String sql = "SELECT * FROM animal WHERE id = :id;";
+        String sql = "SELECT * FROM animals WHERE id = :id;";
         try (Connection con = DB.sql2otest.open()) {
             AnimalAbstract myAnimal = con.createQuery(sql)
                     .addParameter("id", id)

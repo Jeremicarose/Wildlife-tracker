@@ -14,7 +14,7 @@ public class Animal extends AnimalAbstract  {
     @Override
     public void save(){
         try(Connection con = DB.sql2otest.open()){
-            String sql = "INSERT INTO animal (name, age, health, type) VALUES (:name, :age, :health, :type);";
+            String sql = "INSERT INTO animals (name, age, health, type) VALUES (:name, :age, :health, :type);";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .addParameter("age", this.age)
@@ -33,7 +33,7 @@ public class Animal extends AnimalAbstract  {
 
     }
     public static List<Animal> all(){
-        String sql = "SELECT * FROM animal WHERE type='safe'";
+        String sql = "SELECT * FROM animals WHERE type='safe'";
         try(Connection con = DB.sql2otest.open()) {
             return con.createQuery(sql).executeAndFetch(Animal.class);
         }
