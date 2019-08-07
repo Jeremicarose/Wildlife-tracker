@@ -1,44 +1,96 @@
 import org.sql2o.Connection;
 
+import java.sql.Timestamp;
 import java.util.List;
 
-public class Endangered extends  AnimalAbstract {
-    private static final String ANIMAL_TYPE = "endangered";
-    public Endangered(String name, String age, String health, String type) {
+public class Sightings implements AnimalInterface{
+    private String name;
+    private String location;
+    private int animalId;
+    private Timestamp timestamp;
+    private int id;
+    public Sightings(String name, String location, int animalId) {
         this.name = name;
-        this.age = age;
-        this.health = health;
-        this.type = ANIMAL_TYPE;
+        this.location = location;
+        this.animalId = animalId;
     }
-    @Override
-    public boolean equals(Object otherAnimal){
-        if(!(otherAnimal instanceof Object)){
-            return false;
-        }
-        AnimalAbstract myAnimal = (AnimalAbstract) otherAnimal;
-        return this.getName().equals(myAnimal.getName())&&
-                this.getType().equals(myAnimal.getType())&&
-                this.getId()==myAnimal.getId() ;
 
+    public String getName() {
+        return name;
     }
-    @Override
-    public void save(){
+
+    public String getLocation() {
+        return location;
+    }
+
+    public int getAnimalId() {
+        return animalId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+    public AnimalAbstract getAnimal() {
+        String sql = "SELECT * FROM animal WHERE id = :id";
         try(Connection con = DB.sql2otest.open()){
-            String sql = "INSERT INTO animal (name, age, health, type) VALUES (:name, :age, :health, :type);";
+            AnimalAbstract myAnimal = con.createQuery(sql)
+                    .addParameter("id",this.animalId)
+                    .executeAndFetchFirst(AnimalAbstract.class);
+            return myAnimal;
+        }
+    }
+
+    public void save() {
+        try (Connection con = DB.sql2otest.open()) {
+            String sql = "INSERT INTO sighting (name, location, animalId, timestamp) VALUES (:name, :location, :animalId, now());";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
-                    .addParameter("age", this.age)
-                    .addParameter("health", this.health)
-                    .addParameter("type", this.type)
+                    .addParameter("location", this.location)
+                    .addParameter("animalId", this.animalId)
                     .executeUpdate()
                     .getKey();
         }
     }
-    public static List<Endangered> all(){
-        String sql = "SELECT * FROM animal WHERE type='endangered'";
-        try(org.sql2o.Connection con = DB.sql2otest.open()) {
-            return con.createQuery(sql).executeAndFetch(Endangered.class);
+    @Override
+    public boolean equals(Object otherSighting){
+        if(!(otherSighting instanceof Object)){
+            return false;
+        }
+        Sightings myAnimal = (Sightings) otherSighting;
+        return this.getName().equals(myAnimal.getName())&&
+                this.getLocation().equals(myAnimal.getLocation())&&
+                this.getId()==myAnimal.getId() ;
+    }
+    public static List<Sightings> all(){
+        String sql = "SELECT * FROM sighting;";
+        try(Connection con = DB.sql2otest.open()) {
+            return con.createQuery(sql).executeAndFetch(Sightings.class);
+        }
+    }
+    public static Sightings find(int id){
+        String sql = "SELECT * FROM sighting WHERE id = :id";
+        try(Connection con = DB.sql2otest.open()) {
+            Sightings sighting = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Sightings.class);
+            return sighting;
+        }
+    }
+    @Override
+    public void delete() {
+        try(Connection con = DB.sql2otest.open()) {
+            String sql = "DELETE FROM sighting WHERE id = :id";
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
         }
     }
 
 }
+
+
+
